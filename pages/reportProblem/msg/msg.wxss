@@ -1,0 +1,15 @@
+/* pages/evaluation/msg/msg.wxss */
+
+page {
+  background-color: #fff;
+}
+
+page, .page {
+  height: 100%;
+}
+
+
+.detail{
+  margin-left: 7%;
+  margin-right: 7%;
+}

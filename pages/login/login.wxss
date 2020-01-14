@@ -1,0 +1,97 @@
+.login{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 30rpx;
+}
+.login-font{
+  display: flex;
+  font-size: 50rpx;
+  margin-top:100rpx;
+  margin-bottom: 20rpx;
+  font-weight: 560;
+  align-content: center;
+  justify-content: center;
+}
+.description-text{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 120rpx;
+  color:#9B9B9B;
+}
+.account{
+  margin-top: 20rpx; 
+  margin-left:20rpx;
+  display: flex;
+  flex-direction: row;
+  font-size: 40rpx;
+  border-bottom: 1px solid #f0f0f0;
+  margin: 30rpx 20rpx;
+  padding-bottom: 20rpx;
+  justify-content: center;
+  align-content: center;
+  /* 实现文字垂直居中，太秀了 */
+  align-items: center; 
+}
+
+.areacode{
+  margin-left: 90rpx;
+  width: 180rpx
+}
+
+.btn {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 0rpx;
+  margin-bottom: 10rpx;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.btn button {
+  width: 100%;
+  background:#0DBCBC;
+  border: none;
+  text-align: center;
+  color: #fff;
+  outline: none;
+  font-size: 40rpx;
+}
+.register{
+  font-size:35rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:baseline;
+  width:90%;
+  margin-left: 5%;
+}
+.forgotpassword{
+  width:100%;
+  /*border-bottom: 1px solid #f0f0f0;*/
+  height: 80rpx;
+  background: none !important;
+  color: black !important;
+}
+/*去掉按钮边框*/
+.forgotpassword::after{
+  border: none;
+}
+.agreement{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-size: 28rpx;
+  margin-top:400rpx;
+}
+.agreement-details{
+  color: #0DBCBC;
+}
+.phone-class{
+ /* 设置显示数字之间的间隔 */
+  /* letter-spacing:6px;  */
+  margin-top: 10rpx;
+}

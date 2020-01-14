@@ -1,0 +1,74 @@
+/* pages/choose/choose.wxss */
+.title{
+  width: 100%;
+  font-size: 50rpx;
+  color: #0a98f6;
+  font-weight:bold; 
+  display: flex;  
+  justify-content: center;
+  margin-top: 50rpx;
+  margin-bottom: 100rpx;
+}
+
+.choose-button{
+  margin-top: 50rpx;
+  width: 50%;
+  border: 2rpx #0a98f6 solid;
+}
+
+.company{
+  display: flex;  
+  justify-content: center;
+  margin-top: 550rpx;
+  font-size: 30rpx;
+}
+
+.weui-footer {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  align-content: center;
+  /* 实现文字垂直居中，太秀了 */
+  align-items: center; 
+}
+
+.weui-footer_fixed-bottom {
+  margin-bottom: 0;
+}
+
+
+
+
+
+.picture-and-text{
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 100rpx;
+  justify-content: space-between;
+}
+
+.picture{
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+.picture-image{
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.video-image{
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.text1{
+  margin-top: 20rpx;
+  margin-left: 10rpx;
+}

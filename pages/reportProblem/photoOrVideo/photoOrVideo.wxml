@@ -1,0 +1,16 @@
+<view>
+  <view class="title">
+    <text>上传图片或视频</text>
+    <image class="upload" src="/images/icons/upload.png"></image>
+  </view>
+  <view class="picture-and-text">
+    <view class="picture" bindtap="uploadPhoto">
+      <image class="picture-image" src="/images/icons/uploadPhoto1.png"></image>
+      <text class="text1">上传图片</text>
+    </view>
+    <view class="picture" bindtap="uploadVideo">
+      <image class="video-image" src="/images/icons/uploadVideo1.png"></image>
+      <text class="text1">上传视频</text>
+    </view>
+  </view>
+</view>

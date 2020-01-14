@@ -1,0 +1,10 @@
+<!--pages/userAgreement/userAgreement.wxml-->
+<view>
+  <view>
+    <text class="userAgreement-title">用户注册协议与隐私政策</text>
+  </view>
+  <view>
+    <text class="userAgreement-content">{{userAgreement1}}</text>
+    <text class="userAgreement-content">{{userAgreement2}}</text>
+  </view>
+</view>

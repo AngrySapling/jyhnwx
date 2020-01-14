@@ -1,0 +1,75 @@
+<!--pages/evaluation/evaluation.wxml-->
+<view>
+  <form bindsubmit="bindFormSubmit">
+    <view class='title'>
+      <text>智能配药机问题反馈</text>
+    </view>
+    <view class='input-view'>
+      <text class='input-must'>*</text>
+      <text class='input-text'>1.请输入您的手机号码：</text>
+      <!-- <input name="phone" class='input1' maxlength='11' type='number' value="{{phoneNumber}}" placeholder-style="color:#cfd3d6"></input> -->
+      <view class="phone-class">
+        <view class='phone'>
+          <input name="phone" disabled="true" value="{{phoneNumber}}"></input>
+        </view>
+        <button class='changephone' bindtap="changePhone">更换手机号码</button>
+      </view>
+
+    </view>
+
+    <view class='input-view'>
+      <text class='input-must'>*</text>
+      <text class='input-text'>2.请输入主机序列号：</text>
+      <input name="sn" class='input1' maxlength='12' placeholder="12位字母带数字，请在取药机右侧查看" placeholder-style="color:#cfd3d6"></input>
+    </view>
+    <view class='input-view'>
+      <text class='input-must' decode="{{true}}">&nbsp;</text>
+      <text class='input-text'>3.您的邮箱：</text>
+      <input name="mail" class='input1' placeholder="支持QQ邮箱，163邮箱，谷歌、新浪邮箱等" placeholder-style="color:#cfd3d6"></input>
+    </view>
+    <view class='input-view'>
+      <view>
+        <text class='input-must'>*</text>
+        <text class='input-text'>4.问题类别：</text>
+      </view>
+      <view class="problem-radio">
+        <view class="section section_gap">
+          <radio-group class="radio-group" bindchange="radioChange">
+            <radio class="radio" wx:for-items="{{items}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
+              <view class="problem-detail">
+                <text>{{item.value}}</text>
+                <text class="detail-text">{{item.detail}}</text>
+              </view>
+            </radio>
+          </radio-group>
+        </view>
+
+      </view>
+    </view>
+    <!-- <view class='star-view'> -->
+
+    <!-- </view> -->
+
+    <view class='input-view'>
+      <text class='input-must'>*</text>
+      <text class='input-text'>5.问题详情：</text>
+      <textarea name="comment" class='input-area' placeholder="详细描述您在使用过程中遇到的问题，后续的反馈将发送至您的邮箱或手机，请确认信息填写无误！" placeholder-style="color:#cfd3d6"></textarea>
+    </view>
+    <view class='input-view'>
+      <text class='input-must' decode="{{true}}">&nbsp;</text>
+      <text class='input-text'>6.请上传问题反馈附件（图片）：</text>
+      <!-- <button bindtap="choose_upload" class="upload">点击此处上传</button> -->
+      <view class="picture-and-text">
+        <view class="picture" bindtap="uploadPhoto">
+          <image class="picture-image" src="/images/icons/uploadPhoto1.png"></image>
+          <text class="text1">上传图片</text>
+        </view>
+        <view class="picture" bindtap="uploadVideo">
+          <image class="video-image" src="/images/icons/uploadVideo1.png"></image>
+          <text class="text1">上传视频</text>
+        </view>
+      </view>
+    </view>
+    <button form-type="submit" class="confirm">提交</button>
+  </form>
+</view>

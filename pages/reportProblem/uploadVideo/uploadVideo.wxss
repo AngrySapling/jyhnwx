@@ -1,0 +1,25 @@
+/* pages/reportProblem/uploadVideo/uploadVideo.wxss */
+.page__title{
+  width: 100%;
+  font-size: 50rpx;
+  color: #0a98f6;
+  font-weight:bold; 
+  display: flex;  
+  justify-content: center;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+}
+
+.video{
+  width: 85%;
+  margin-left: 7.5%;
+}
+
+.confirm{
+  width: 60%;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+  color: #0a98f6;
+  font-weight: bold;
+  border: 2rpx #0a98f6 solid;
+}

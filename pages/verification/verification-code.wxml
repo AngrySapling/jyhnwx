@@ -1,0 +1,27 @@
+<!--pages/verification-code.wxml-->
+<view class="verification">
+  <view class="login-font">
+    <text>登录简易慧能</text>
+  </view>
+  <view class="account">
+    <text decode='ture'>+86&ensp;></text>
+    <text decode='ture'>&ensp;&ensp;</text>
+    <text>{{phoneNumber}}</text>
+  </view>
+  <view>
+    <form bindsubmit="formSubmit">
+      <view class='content'>
+        <block wx:for="{{Length}}" wx:key="item">
+          <input class='iptbox' value="{{Value.length>=index+1?Value[index]:''}}" disabled password='{{ispassword}}' catchtap='Tap'></input>
+        </block>
+      </view>
+      <input name="password" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
+      <view>
+        <text class="description-text"decode='ture' wx:if="{{!again}}">{{sendtext1}}&ensp;{{timer}}{{sendtext2}}</text>
+        <text class="description-text"decode='ture' wx:else>{{sendtext3}}</text>
+        <!-- <button class="btn-area" formType="submit">Submit</button> -->
+      </view>
+    </form>
+  </view>
+
+</view>

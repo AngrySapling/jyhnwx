@@ -1,0 +1,97 @@
+/* pages/evaluation/evaluation.wxss */
+
+.title {
+  width: 100%;
+  font-size: 50rpx;
+  color: #0a98f6;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+}
+
+.input-view {
+  margin-top: 50rpx;
+}
+
+.input-must {
+  margin-left: 7%;
+  color: red;
+}
+
+.input-text {
+  margin-left: 0%;
+  margin-bottom: 50rpx;
+}
+.phone-class{
+  width: 92%;
+  margin-left: 8%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.phone {
+  width: 50%;
+  height: 60rpx;
+  /* border: 2rpx #cfd3d6 solid; */
+  margin-top: 20rpx;
+  border-radius: 5px;
+  font-size: 40rpx;
+}
+.changephone{
+  width: 40%;
+  background-color: white;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  align-items: center; 
+  border: 0;
+  color: #0a98f6;
+  font-weight: bold;
+  font-size: 35rpx;
+}
+/* .changephone ::after{
+  border: none;
+  content: none;
+} */
+
+.input1 {
+  width: 83%;
+  height: 60rpx;
+  border: 2rpx #cfd3d6 solid;
+  margin-left: 8%;
+  margin-top: 20rpx;
+  border-radius: 5px;
+
+}
+
+.input-area {
+  width: 83%;
+  height: 300rpx;
+  border: 2rpx #cfd3d6 solid;
+  margin-left: 8%;
+  margin-top: 20rpx;
+  border-radius: 5px;
+}
+
+.confirm {
+  width: 60%;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+  background: #FFFFFF;
+  color: #0a98f6;
+  font-weight: bold;
+  border: 2rpx #0a98f6 solid;
+}
+
+.star-view {
+  display: flex;
+  margin-left: 8%;
+  margin-top: 15rpx;
+}
+
+.star {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 3%;
+}

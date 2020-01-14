@@ -1,0 +1,46 @@
+<!--pages/wechatLogin/wechatLogin.wxml-->
+<view wx:if='{{firstLogin}}'>
+  <view class="close">
+    <navigator target="miniProgram" open-type="exit">关闭</navigator>
+  </view>
+  <view class="wx-view">
+    <view class="first">
+      <image class="logo" src="/images/logo/logo_name.jpg"></image>
+      <!-- <text decode='ture'>教育纵横&ensp;&ensp;</text> -->
+      <text decode='ture'>&ensp;&ensp;申请使用</text>
+    </view>
+    <view class="bigsize">
+      <text>你的账号信息（昵称、头像、地区及性别）</text>
+    </view>
+    <view class="feihua">
+      <text>你可选择使用你的微信登录</text>
+    </view>
+    <view class="limit"></view>
+    <view class="avatarAndName">
+      <view class="avatar">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="name-avatar">
+        <view class="name-view">
+          <open-data type="userNickName" class="name"></open-data>
+          <text class="name-information">微信个人信息</text>
+        </view>
+        <view>
+          <icon type="success_no_circle" size="23"></icon>
+        </view>
+      </view>
+    </view>
+    <view class="limit"></view>
+    <!-- 需要使用 button 来授权登录 -->
+    <!-- <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button> -->
+
+    <view class="agreeOrnot">
+      <button class="agree" type="primary" style="background: #05C25E" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" bindtap="toInputPhone">同意</button>
+      <view wx:else>请升级微信版本</view>
+      <navigator target="miniProgram" open-type="exit">
+        <button class="no-agree" type="default" bindtap="close" style="background: #EFEDEE;color: #05C25E">拒绝</button>
+      </navigator>
+    </view>
+
+  </view>
+</view>

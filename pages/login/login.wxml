@@ -1,0 +1,29 @@
+<view>
+  <form bindsubmit="getCode">
+    <view class="login">
+      <view class="login-font">
+        <text>{{title}}</text>
+      </view>
+      <view>
+        <text class="description-text">验证即登录，未注册则自动创建新账号</text>
+      </view>
+    </view>
+    <view class="account">
+      <text decode='ture' class="areacode">+86&ensp;>&ensp;</text>
+      <input placeholder-class="phcolor" name='phoneNumber' class="phone-class" placeholder='请输入手机号码' type="number" maxlength="11" />
+    </view>
+    <view>
+      <view class='btn'>
+        <button size='mini' form-type="submit">获取验证码</button>
+      </view>
+      <!-- <view class="register">
+        <button class="forgotpassword" type="primary" catchtap='accountAndPasswordLogin' bindtap="nowregister">账号密码登录</button>
+      </view> -->
+      <view class="agreement">
+        <text>登录即代表您同意 </text>
+        <text decode='ture'>&ensp;</text>
+        <text class="agreement-details" catchtap='userAgreement' bindtap='loginin'>简易慧能用户注册协议与隐私政策</text>
+      </view>
+    </view>
+  </form>
+</view>

@@ -1,0 +1,61 @@
+<!--pages/evaluation/evaluation.wxml-->
+<view>
+  <form bindsubmit="bindFormSubmit">
+    <view class='title'>
+      <text>智能配药机使用评价调研</text>
+    </view>
+    <view class='input-view'>
+      <text class='input-must'>*</text>
+      <text class='input-text'>1.请确认您的手机号码：</text>
+      <!-- <input name="phone" class='input1' maxlength='11' type='number'	 value="{{phoneNumber}}" placeholder-style="color:#cfd3d6"></input>
+    </view> -->
+      <view class="phone-class">
+        <view class='phone'>
+          <input name="phone" disabled="true" value="{{phoneNumber}}"></input>
+        </view>
+        <button class='changephone' bindtap="changePhone">更换手机号码</button>
+      </view>
+
+
+    </view>
+    <view class='input-view'>
+      <text class='input-must'>*</text>
+      <text class='input-text'>2.请输入主机序列号：</text>
+      <input name="sn" class='input1' maxlength='12' placeholder="12位字母带数字，请在取药机右侧查看" placeholder-style="color:#cfd3d6"></input>
+    </view>
+    <view class='input-view'>
+      <text class='input-must' decode="{{true}}">&nbsp;</text>
+      <text class='input-text'>3.您的邮箱：</text>
+      <input name="mail" class='input1' placeholder="支持QQ邮箱，163邮箱，谷歌、新浪邮箱等" placeholder-style="color:#cfd3d6"></input>
+    </view>
+    <view class='input-view'>
+      <view>
+        <text class='input-must'>*</text>
+        <text class='input-text'>4.总体使用评价：</text>
+      </view>
+      <view class='star-view'>
+        <image id='0' catchtap='clickStar' class='star' wx:if="{{starnum[0]>0}}" src='/images/icons/star.png'></image>
+        <image id='0' catchtap='clickStar' class='star' wx:else src='/images/icons/no-star.png'></image>
+        <image id='1' catchtap='clickStar' class='star' wx:if="{{starnum[1]>0}}" src='/images/icons/star.png'></image>
+        <image id='1' catchtap='clickStar' class='star' wx:else src='/images/icons/no-star.png'></image>
+        <image id='2' catchtap='clickStar' class='star' wx:if="{{starnum[2]>0}}" src='/images/icons/star.png'></image>
+        <image id='2' catchtap='clickStar' class='star' wx:else src='/images/icons/no-star.png'></image>
+        <image id='3' catchtap='clickStar' class='star' wx:if="{{starnum[3]>0}}" src='/images/icons/star.png'></image>
+        <image id='3' catchtap='clickStar' class='star' wx:else src='/images/icons/no-star.png'></image>
+        <image id='4' catchtap='clickStar' class='star' wx:if="{{starnum[4]>0}}" src='/images/icons/star.png'></image>
+        <image id='4' catchtap='clickStar' class='star' wx:else src='/images/icons/no-star.png'></image>
+      </view>
+    </view>
+    <view class='input-view'>
+      <text class='input-must'>*</text>
+      <text class='input-text'>5.使用体验：</text>
+      <textarea name="comment" class='input-area' placeholder="请输入您过去一段时间对本产品得使用情况，可分别从外观、功能、屏幕等方面给予评价，后续的反馈将发送至您的邮箱或手机，请确认信息填写无误！" placeholder-style="color:#cfd3d6"></textarea>
+    </view>
+    <view class='input-view'>
+      <text class='input-must' decode="{{true}}">&nbsp;&nbsp;</text>
+      <text class='input-text'>6.改进建议：</text>
+      <textarea name="advice" class='input-area' placeholder="您可以在使用情况的基础上给予我们一些改进建议，我们将仔细评估并在下一版进行改进，请您及时关注！" placeholder-style="color:#cfd3d6"></textarea>
+    </view>
+    <button form-type="submit" class="confirm">提交</button>
+  </form>
+</view>
