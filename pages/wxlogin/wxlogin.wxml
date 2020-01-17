@@ -1,5 +1,5 @@
 <!--pages/wechatLogin/wechatLogin.wxml-->
-<view wx:if='{{firstLogin}}'>
+<view>
   <view class="close">
     <navigator target="miniProgram" open-type="exit">关闭</navigator>
   </view>
@@ -35,11 +35,16 @@
     <!-- <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button> -->
 
     <view class="agreeOrnot">
-      <button class="agree" type="primary" style="background: #05C25E" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" bindtap="toInputPhone">同意</button>
+      <button class="agree" type="primary" style="background: #05C25E" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >同意</button>
       <view wx:else>请升级微信版本</view>
-      <navigator target="miniProgram" open-type="exit">
-        <button class="no-agree" type="default" bindtap="close" style="background: #EFEDEE;color: #05C25E">拒绝</button>
-      </navigator>
+      <!-- <navigator target="miniProgram" open-type="exit"> -->
+        <navigator open-type="exit" target="miniProgram" hover-class="navigator-hover">
+          <button class="no-agree" type="default" style="background: #EFEDEE;color: #05C25E">
+            拒绝
+          </button>
+        </navigator>
+        
+      <!-- </navigator> -->
     </view>
 
   </view>

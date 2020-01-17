@@ -1,4 +1,5 @@
 // pages/wechatLogin/wechatLogin.js
+import api from '../../api/api.js'
 Page({
 
   /**
@@ -19,67 +20,52 @@ Page({
   onLoad: function (options) {
     
   },
-  // var that = this;
-  // this.getCodeAndOpinid();
-  // // this.data.wxUniqueId = wx.getStorageSync("UniqueId")
-  // console.log("id:", that.data.wxUniqueId)
-  //   return;
-  // console.log("id2:", that.data.wxUniqueId)
-  //   // 查看是否授权
-  //   wx.getSetting({
-  //   success(res) {
-  //     if (res.authSetting['scope.userInfo']) {
-  //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-  //       console.log(res, '授权')
-  //       wx.getUserInfo({
-  //         success: function (res) {
-  //           console.log(res.userInfo)
-  //           that.sendWxChatUserInfo(res.userInfo);
-  //         }
-  //       })
-  //     }
-  //   }
-  // })
 
 
-  sendWxChatUserInfo: function (userInfo) {
+  sendWxChatUserInfo: function (userInfo, token) {
+    console.log(userInfo, 'asd ',token.wxUniqueId)
+    return;
     var that = this;
-    console.log("sendWxChatUserInfo:init:", that.data.wxUniqueId)
-    wx.request({
-      url: 'http://www.easeway.co:8989/wechat/saveWechat',
-      method: 'POST',
-      data: {
-        "wechatUuid": that.data.wxUniqueId,
-        "gender": userInfo.gender,
-        "userName": userInfo.nickName,
-        "language": userInfo.language,
-        "country": userInfo.country,
-        "province": userInfo.province,
-        "city": userInfo.city,
-        "avatarUrl": userInfo.avatarUrl
-      },
-      // header: {
-      //   'content-type': 'json'
-      // },
-      success: function (res) {
-        console.log("success_Res:", res)
-      },
-      fail: function (res) {
-        console.log("fail_Res:", res)
+    api.saveWechat({
+      "wechatUuid": token.wxUniqueId,
+      "gender": userInfo.gender,
+      "userName": userInfo.nickName,
+      "language": userInfo.language,
+      "country": userInfo.country,
+      "province": userInfo.province,
+      "city": userInfo.city,
+      "avatarUrl": userInfo.avatarUrl
+    }, (res) => {
+      console.log(res,7777)
+      return;
+      if (res.errCode === 1) {//成功将信息保存
+        if (token.isBindStatus) {
+          wx.reLaunch({
+            url: '/pages/choose/choose'
+          })
+
+        } else {
+          wx.reLaunch({
+            url: '/pages/login/login'
+          })
+        }
       }
     })
   },
-
-
-
-
-
   bindGetUserInfo(e) {
     console.log(e.detail.userInfo)
+    let token = wx.getStorageSync("token");
+    this.sendWxChatUserInfo(e.detail.userInfo,token);
   },
 
 
-
+  // //获取用户信息
+  // wx.getUserInfo({
+  //   success: function (res) {
+  //     console.log(res.userInfo)
+  //     that.sendWxChatUserInfo(res.userInfo);
+  //   }
+  // })
 
 
   /**
@@ -137,9 +123,6 @@ Page({
       //获取code
       success: function (res) {
         // var code = res.code; //返回code
-        console.log("res.code",res.code);
-        var appId = 'wxd71017f72fd0e8db';
-        var secret = 'ffdd813e1604159aea90d424166cdc68';
         if (res.code) {
           //发起网络请求
           wx.request({
@@ -181,36 +164,6 @@ Page({
         } else {
           console.log('登录失败！' + res.errMsg)
         }
-        
-        // that.setData({ code: '' })
-
-        // wx.request({
-        //   url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + secret + '&js_code=' + res.code + '&grant_type=authorization_code',
-        //   data: {},
-        //   header: {
-        //     'content-type': 'json'
-        //   },
-        //   success: function (res) {
-        //     console.log('res为' + res.data.errmsg);
-        //     var openid = res.data.openid //返回openid
-        //     if (wx.getStorageSync("userId") == openid) { //如果openid存在，即用户非首次登陆
-        //       that.setData({
-        //         firstLogin: false
-        //       })
-        //       wx.redirectTo({
-        //         url: '../choose/choose'
-        //       })
-        //     } else { //首次登陆
-        //       wx.setStorageSync("userId", openid);
-        //       that.setData({
-        //         firstLogin: true
-        //       })
-        //     }
-        //     console.log('openid为：' + openid);
-        //     console.log('unionid为：' + res.data.unionid);
-        //     console.log('session_key为：' + res.data.session_key);
-        //   }
-        // })
 
       }
     })

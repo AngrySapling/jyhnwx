@@ -1,4 +1,5 @@
 // pages/verification-code.js
+import api from '../../api/api.js'
 var timerNum = 0;
 Page({
 
@@ -30,36 +31,41 @@ Page({
       console.log("value:" + this.data.Value)
       var timestamp = Date.parse(new Date());
       timestamp = timestamp / 1000;
-      wx.request({
-        url: 'http://www.easeway.co:8989/wechat/bindPhone',
-        method: 'POST',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          "areaCode": "+86",
-          "phoneNumber": this.data.phoneNumber,
-          "code": this.data.Value,
-          "identification": this.data.phoneNumber+1,
-          "wechatUuid": wx.getStorageSync("UniqueId")
-        },
-        success: function (res) {
-          console.log("success:" + res.data.errCode) // 服务器回包信息
-          if (res.data.errCode == 1) {
-            wx.showToast({
-              title: '填写正确',
-              icon: 'success',
-              duration: 1500
-            })
-            wx.redirectTo({
-              url: '../choose/choose?phoneNumber=' + that.data.phoneNumber
-            })
-          }
-        },
-        fail: function (e) {
-          console.log("fail" + e.errMsg);
+      api.bindPhone({
+        "areaCode": "+86",
+        "phoneNumber": this.data.phoneNumber,
+        "code": this.data.Value,
+        "identification": this.data.phoneNumber + 1,
+        "wechatUuid": wx.getStorageSync("token").wechatUuid
+      }, (res) => {
+        wx.hideLoading()
+        if (res.errCode === 1) {
+          wx.showToast({
+            title: '填写正确',
+            icon: 'success',
+            duration: 1500
+          })
+          wx.login({
+            success(lg) {
+              api.getOpenIdByCode({
+                code: lg.code
+              }, (res) => {
+                console.log(res)
+                if (res.errCode === 1) {
+                  let data = res.data;
+                  wx.setStorageSync("token", data);
+                  wx.redirectTo({
+                    url: '../choose/choose?phoneNumber=' + that.data.phoneNumber
+                  })
+                }
+
+              })
+            }
+          })
+          
         }
-      })
+        console.log("success" + res) // 服务器回包信息
+      });
     }
   },
   //六个框的函数，需改

@@ -109,12 +109,22 @@ Page({
       });
       return false;
     } else {
+      wx.showLoading({
+        title: '加载中',
+        mask:true
+      })
       http.getPhoneCode({
         "areaCode": "+86",
         "phoneNumber": phoneNumber,
         "identification": phoneNumber + 1,
-      }, (msg) => {
-        console.log("success" + res.data.errMsg) // 服务器回包信息
+      }, (res) => {
+        wx.hideLoading()
+        if(res.errCode === 1){
+          wx.navigateTo({
+            url: '../verification/verification-code?phoneNumber=' + phoneNumber + '&verificationcode=' + res.data
+          })
+        }
+        console.log("success" + res) // 服务器回包信息
       });
       return;
       console.log('qingqiu ')

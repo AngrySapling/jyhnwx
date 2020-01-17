@@ -1,8 +1,8 @@
 let reqUrl = "http://www.easeway.co:8989";
+reqUrl = "http://192.168.199.228:8989";
 // reqUrl = 'https://api.it120.cc/mzsx';
-let Token = '',token={};
-token = Token?{ 'Token': Token }:{}
-let header = Object.assign({}, { "Content-Type": "application/json;charset=UTF-8"},token)
+let Token = wx.getStorageInfoSync('token'),token={};
+let header = { "Content-Type": "application/json;charset=UTF-8" } 
 let Options = {
   url:'',
   data:{},
@@ -41,85 +41,85 @@ function RequestP(opt={}){
   })
 }
 
-function login(){
-  return new Promise((res,rej)=>{
-    //微信登录
-    wx.login({
-      success(lg){
-        //微信登录获取token
-        // /wechat/getOpenIdByCode ///user/wxapp/login
-        console.log(lg)
-        RequestP({
-          url: `${reqUrl}/wechat/getOpenIdByCode`,
-          data:{
-            code: lg.code,
-            type: 2
-          },
-        }).then((r1)=>{
-          if (r1.errCode === 1){
-            Token = r1.data.wechatUuid;
-            wx.setStorage({ key: 'token', data: Token })
-            res(r1)
-          }else{
-            console.log('报错')
-          }
+
+function api(options={},istoken=true){
+    if(istoken){
+      token = Token ? { 'Token': Token } : {}
+      header = Object.assign({},header, token)
+    }
+    return new Promise((res,rej)=>{
+        RequestP(options).then((r2) => {
+            if (r2.errCode === 1) {
+              res(r2)
+            } else {
+              res(r2)
+              wx.showModal({
+                title: '提示',
+                content: r2.errMsg,
+                showCancel: false
+              })
+            }
         })
-      }
     })
-  })
 }
+module.exports = api;
+
+
+// function login(){
+//   return new Promise((res,rej)=>{
+//     //微信登录
+//     wx.login({
+//       success(lg){
+//         //微信登录获取token
+//         // /wechat/getOpenIdByCode ///user/wxapp/login
+//         console.log(lg)
+//         RequestP({
+//           url: `${reqUrl}/wechat/getOpenIdByCode`,
+//           data:{
+//             code: lg.code,
+//             type: 2
+//           },
+//         }).then((r1)=>{
+//           if (r1.errCode === 1){
+//             Token = r1.data.wechatUuid;
+//             wx.setStorage({ key: 'token', data: Token })
+//             res(r1)
+//           }else{
+//             console.log('报错')
+//             wx.
+//           }
+//         })
+//       }
+//     })
+//   })
+// }
 //获取token
 /**
  * 如果多个请求的话,出现未登录首先
- */
-let isLogin = false;
-let loginList = [];
-function getToken(){
-  return new Promise((res,rej)=>{
-    //未登录
-    if(!Token){
-      loginList.push({res,rej});
-      if(!isLogin){//拦截后面进行的多次请求
-        isLogin = true;
-        login().then((r)=>{
-          isLogin = true;
-          while(loginList.length){
-            loginList.shift().res(r);
-          }
-        }).catch((err)=>{
-          isLogin = false;
-          while (loginList.length) {
-            loginList.shift().res(r);
-          }
-        });
-      }
-    }else{
-      res()
-    }
-  })
-}
-
-
-function api(options={},isLogin=true){
-  if(isLogin){
-    return new Promise((res,rej)=>{
-      getToken().then(()=>{
-        RequestP(options).then((r2)=>{
-          if (res.code === 401) {
-            Token = "";
-            wx.removeStorage({
-              key: 'token',
-              success: function (res) {
-
-              },
-            })
-          }else{
-            res(r2)
-          }
-        })
-        
-      })
-    })
-  }
-}
-module.exports = api;
+//  */
+// let isLogin = false;
+// let loginList = [];
+// function getToken(){
+//   return new Promise((res,rej)=>{
+//     //未登录
+//     if(!Token){
+//       loginList.push({res,rej});
+//       if(!isLogin){//拦截后面进行的多次请求
+//         isLogin = true;
+//         login().then((r)=>{
+//           isLogin = true;
+//           while(loginList.length){
+//             loginList.shift().res(r);
+//           }
+//         }).catch((err)=>{
+//           isLogin = false;
+//           while (loginList.length) {
+//             loginList.shift().res(r);
+//           }
+//         });
+//       }
+//     }else{
+//       res()
+//     }
+//   })
+// }

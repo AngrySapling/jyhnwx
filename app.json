@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/login/login",
-    "pages/wxlogin/wxlogin",
-    "pages/verification/verification-code",
+    "pages/loading/loading",
     "pages/choose/choose",
+    "pages/wxlogin/wxlogin",
+    "pages/login/login",
+    "pages/verification/verification-code",
     "pages/reportProblem/msg/msg",
     "pages/evaluation/evaluation",
     "pages/evaluation/msg/msg",
@@ -12,7 +13,6 @@
     "pages/reportProblem/uploadPhoto/uploadPhoto",
     "pages/reportProblem/uploadVideo/uploadVideo",
     "pages/reportProblem/photoOrVideo/photoOrVideo"
-
   ],
   "window": {
     "backgroundTextStyle": "light",

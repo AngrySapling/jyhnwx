@@ -1,4 +1,5 @@
 // pages/choose/choose.js
+import api from '../../api/api.js'
 Page({
 
   /**
@@ -12,9 +13,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      phoneNumber: options.phoneNumber
-    })
+    console.log(options)
+    if (!options.phoneNumber){
+      let token = wx.getStorageSync("token");
+      api.getPhoneByWechatUuid({
+        wechatUuid: token.wechatUuid
+      }, (res) => {
+        console.log(res)
+        if (res.errCode === 1) {
+          let data = res.data;
+          this.setData({
+            phoneNumber: data.phoneNumber
+          })
+        }
+
+      })
+    }else{
+      this.setData({
+        phoneNumber: options.phoneNumber
+      })
+    }
+    
   },
 
   /**
