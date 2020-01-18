@@ -1,2 +1,4 @@
 <!--pages/loading/loading.wxml-->
-<text>pages/loading/loading.wxml</text>
+<view class="loading">
+  <image src="../../images/loading.png"></image>
+</view>

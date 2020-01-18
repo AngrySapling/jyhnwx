@@ -5,9 +5,10 @@ App({
     
   },
   
-  // globalData: {
-  //   userInfo: null
-  // }
+  globalData: {
+    Image: [],
+    Video:"",
+  }
 })
 
 

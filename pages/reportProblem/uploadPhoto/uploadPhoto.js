@@ -1,4 +1,5 @@
 // pages/reportProblem/uploadPhoto/uploadPhoto.js
+let app = getApp(); 
 Page({
 
   /**
@@ -6,7 +7,17 @@ Page({
    */
   data: {
     files: [],
-    maxPhotoNumber: 9
+    maxPhotoNumber: 9,
+    isPlay:true,
+  },
+  confirm:function(e){
+    console.log(e)
+    console.log(this.data.files)
+    // if(!isPlay)return
+    app.globalData.Image = this.data.files
+    wx.navigateBack({
+      delta: 1
+    })
   },
   chooseImage: function (e) {
     var that = this;
@@ -74,7 +85,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      files: app.globalData.Image ? app.globalData.Image:[]
+    })
   },
 
   /**

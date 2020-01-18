@@ -1,5 +1,5 @@
-let reqUrl = "http://www.easeway.co:8989";
-reqUrl = "http://192.168.199.228:8989";
+let reqUrl = "https://www.easeway.co";
+// reqUrl = "http://192.168.199.228:8989";
 // reqUrl = 'https://api.it120.cc/mzsx';
 let Token = wx.getStorageInfoSync('token'),token={};
 let header = { "Content-Type": "application/json;charset=UTF-8" } 
@@ -17,7 +17,6 @@ function isHttpStatus(status){
 function RequestP(opt={}){
   let opts = Object.assign({},Options,opt);
   let {url,data,header,method,dataType} = opts;
-
   return new Promise((res,rej)=>{
     wx.request({
       url,
@@ -42,11 +41,25 @@ function RequestP(opt={}){
 }
 
 
-function api(options={},istoken=true){
+function api(options={},istoken=true,form=false){
+  console.log(istoken, form)
+    if(form){
+      header = {
+        "Content-Type":"application/x-www-form-urlencoded;charset=UTF-8" }//application/x-www-form-urlencoded
+      options.transformRequest = [function (data) {
+        let ret = ''
+        for (let it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        }
+        return ret
+      }]
+    }
     if(istoken){
       token = Token ? { 'Token': Token } : {}
       header = Object.assign({},header, token)
     }
+    options.header = header
+    console.log(header)
     return new Promise((res,rej)=>{
         RequestP(options).then((r2) => {
             if (r2.errCode === 1) {

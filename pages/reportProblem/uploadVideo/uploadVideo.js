@@ -1,4 +1,5 @@
 // pages/reportProblem/uploadVideo/uploadVideo.js
+let app = getApp(); 
 Page({
 
   /**
@@ -21,11 +22,22 @@ Page({
       ]
   },
 
+  confirm: function (e) {
+    console.log(e)
+    console.log(this.data.src)
+    // if (!isPlay) return
+    app.globalData.Video = this.data.src
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      src: app.globalData.Video
+    })
   },
 
   /**

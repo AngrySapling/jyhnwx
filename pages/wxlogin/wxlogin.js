@@ -24,7 +24,6 @@ Page({
 
   sendWxChatUserInfo: function (userInfo, token) {
     console.log(userInfo, 'asd ',token.wxUniqueId)
-    return;
     var that = this;
     api.saveWechat({
       "wechatUuid": token.wxUniqueId,

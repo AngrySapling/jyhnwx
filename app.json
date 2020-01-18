@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/loading/loading",
+    "pages/reportProblem/reportProblem",
     "pages/choose/choose",
     "pages/wxlogin/wxlogin",
     "pages/login/login",
@@ -9,7 +10,6 @@
     "pages/evaluation/evaluation",
     "pages/evaluation/msg/msg",
     "pages/upload/upload",
-    "pages/reportProblem/reportProblem",
     "pages/reportProblem/uploadPhoto/uploadPhoto",
     "pages/reportProblem/uploadVideo/uploadVideo",
     "pages/reportProblem/photoOrVideo/photoOrVideo"

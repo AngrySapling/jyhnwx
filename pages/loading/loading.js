@@ -27,9 +27,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    // return;
     let that = this;
     let token = wx.getStorageSync("token");
-    if (!token.wechatUuid) {
+    if (!token) {
       wx.login({
         success(lg) {
           api.getOpenIdByCode({

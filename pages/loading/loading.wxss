@@ -1,1 +1,13 @@
 /* pages/loading/loading.wxss */
+page{
+  height: 100%;
+  overflow: hidden;
+}
+.loading{
+  height: 100%;
+  width: 100%;
+}
+image{
+  height: 100%;
+  width: 100%;
+}

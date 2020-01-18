@@ -35,7 +35,7 @@
       <view class="problem-radio">
         <view class="section section_gap">
           <radio-group class="radio-group" bindchange="radioChange">
-            <radio class="radio" wx:for-items="{{items}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
+            <radio class="radio" wx:for-items="{{items}}" wx:key="name" value="{{index}}" checked="{{item.checked}}">
               <view class="problem-detail">
                 <text>{{item.value}}</text>
                 <text class="detail-text">{{item.detail}}</text>
@@ -62,11 +62,11 @@
       <view class="picture-and-text">
         <view class="picture" bindtap="uploadPhoto">
           <image class="picture-image" src="/images/icons/uploadPhoto1.png"></image>
-          <text class="text1">上传图片</text>
+          <text class="text1">{{app.globalData.Image.length !== 0?app.globalData.Image.length+"张图片":"上传图片"}}</text>
         </view>
         <view class="picture" bindtap="uploadVideo">
           <image class="video-image" src="/images/icons/uploadVideo1.png"></image>
-          <text class="text1">上传视频</text>
+          <text class="text1">{{app.globalData.Video?"已录制":"上传视频"}}</text>
         </view>
       </view>
     </view>

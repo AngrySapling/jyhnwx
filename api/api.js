@@ -1,5 +1,5 @@
 const api = require('./request.js');
-let reqUrl = "http://www.easeway.co:8989";
+let reqUrl = "https://www.easeway.co";
 // reqUrl = "http://192.168.199.228:8989";
 // reqUrl = 'https://api.it120.cc/mzsx';
 //获取验证码
@@ -12,6 +12,8 @@ const saveWechatUrl = `${reqUrl}/wechat/saveWechat`
 const bindPhoneUrl = `${reqUrl}/wechat/bindPhone`
 //获取用户手机号
 const getPhoneByWechatUuidUrl = `${reqUrl}/wechat/getPhoneByWechatUuid`
+//上传用户提交问题
+const saveFeedBackUrl = `${reqUrl}/wechat/saveFeedBack`
 const http = {
   //获取验证码
   getPhoneCode(data, callback) {
@@ -53,6 +55,15 @@ const http = {
   //获取用户的手机号
   getPhoneByWechatUuid(data,callback){
     api({ url: getPhoneByWechatUuidUrl, method: "POST", data: data }).then((res) => {
+      callback(res)
+    }).catch((err) => {
+      console.log(err)
+      showErr(err)
+    })
+  },
+  //上传用户提交问题
+  saveFeedBack(data, callback) {
+    api({ url: saveFeedBackUrl, method: "POST", data:data },true,true).then((res) => {
       callback(res)
     }).catch((err) => {
       console.log(err)

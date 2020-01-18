@@ -1,12 +1,16 @@
 // pages/evaluation/evaluation.js
+let app = getApp();
+import api from '../../api/api.js' 
+let photoUrl = [], photoSize = 0, videoSize = 0, videoUrl = "", i = 0, length = app.globalData.Image.length, successUp = 0, failUp = 0;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    app:app,
     starnum:[0,0,0,0,0],
-    score: 0,  //ID就是星级-1.因此id+1就是评星
+    type: 8, 
     phoneNumber: '',
     items: [
       { name: 'Screen', value: '屏幕问题', checked: 'true', detail: '屏幕不亮，频闪严重等问题' },
@@ -18,11 +22,16 @@ Page({
       { name: 'Other', value: '其他问题', detail: '配药机运行卡顿等问题' },
     ]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(app)
+    app.globalData = {
+      Image: [],
+      Video: "",
+      scope:0,
+    }
     this.setData({
       phoneNumber: options.phoneNumber
     })
@@ -39,7 +48,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      app:app
+    })
   },
 
   /**
@@ -153,22 +164,22 @@ Page({
         }
       })
     }
-    else if (this.data.score.length < 1) {
-      wx.showModal({
-        title: '未进行评星',
-        content: '请点击4评星，对产品进行总体评价',
-        // confirmText: "确认",
-        // cancelText: "辅助操作",
-        success: function (res) {
-          console.log(res);
-          if (res.confirm) {
-            console.log('用户点击主操作')
-          } else {
-            console.log('用户点击辅助操作')
-          }
-        }
-      })
-    }
+    // else if (this.data.type < 1) {
+    //   wx.showModal({
+    //     title: '未进行评星',
+    //     content: '请点击4评星，对产品进行总体评价',
+    //     // confirmText: "确认",
+    //     // cancelText: "辅助操作",
+    //     success: function (res) {
+    //       console.log(res);
+    //       if (res.confirm) {
+    //         console.log('用户点击主操作')
+    //       } else {
+    //         console.log('用户点击辅助操作')
+    //       }
+    //     }
+    //   })
+    // }
     else if (e.detail.value.comment.length < 1) {
       wx.showModal({
         title: '未填写使用体验',
@@ -186,46 +197,104 @@ Page({
       })
     }
     else{
-      wx.redirectTo({
-        url: './msg/msg'
+      wx.showLoading({
+        title: '加载中',
+        mask:true
       })
-
+      let _this = this
+      
+      this.img_upload('https://www.easeway.co/wechat/uploadPhotoFile ', app.globalData.Image, i, length)
     }
-    console.log("1.phone:" + e.detail.value.phone);
-    console.log("2.sn:" + e.detail.value.sn);
-    console.log("3.mail:" + e.detail.value.mail);
-    console.log("4.score:" + this.data.score);
-    console.log("5.comment:"+e.detail.value.comment);
-    console.log("6.advice:" + e.detail.value.advice);
-
-
-
+    
+    // console.log("1.phone:" + e.detail.value.phone);
+    // console.log("2.sn:" + e.detail.value.sn);
+    // console.log("3.mail:" + e.detail.value.mail);
+    // console.log("4.score:" + this.data.score);
+    // console.log("5.comment:"+e.detail.value.comment);
+    // console.log("6.advice:" + e.detail.value.advice, e);
 
 
     // 请求的包体为 {"a":{"b":[1,2,3],"c":{"d":"test"}}}
-    wx.request({
-
-      url: 'http://192.168.199.228:8989/app/getPhoneCode',
-
-      method: 'POST',
-
-      header: { 'content-type': 'application/json' },
-
-      data: {
-          "areaCode": "+86",
-        "phoneNumber": e.detail.value.phone
-      },
-
-      success: function (res) {
-        console.log("res:"+res)// 服务器回包信息
-      }
-
-    })
+    
 
   },
+  img_upload: function (url, path, i, length) {
+    wx.uploadFile({
+      url: url,
+      filePath: path,
+      header: {
+        'content-type': 'multipart/form-data'
+      },
+      name: "photo",
+      success: function (res) {
+        successUp++;
+        let data = JSON.parse(res.data)
+        photoUrl.push(data.data.photoUrl)
+        photoSize += data.data.photoSize
+      },
+      fail: function () {
+        failUp++;
+      },
+      complete: () => {
+        i++;
+        console.log(photoUrl, photoSize, 99999)
+        if (i == length) {
+          this.showToast('总共' + successUp + '张上传成功,' + failUp + '张上传失败！');
+          if (app.globalData.Video.length) {
+            wx.uploadFile({//上传视频
+              url: "https://www.easeway.co/wechat/uploadVideoFile",
+              filePath: app.globalData.Video,
+              header: {
+                'content-type': 'multipart/form-data'
+              },
+              name: "video",
+              success: function (res) {
+                let videodata = JSON.parse(res.data).data
+                console.log(videodata, 'video')
+                videoUrl = videodata.photoUrl
+                videoSize = videodata.videoSize
+                _this.Playquest(photoUrl, photoSize, videoUrl, videoSize)
+              }
+            })
+          } else {
+            _this.Playquest(photoUrl, photoSize, videoUrl, videoSize)
+          }
 
+        }
+        else {  //递归调用uploadDIY函数
+          this.uploadDIY(filePaths, successUp, failUp, i, length);
+        }
+      },
+    })
+  },
+  //上传文件
+  Playquest: function (photoUrl,photoSize,videoUrl, videoSize){
+        api.saveFeedBack({
+          "areaCode": "+86",
+          "phoneNumber": e.detail.value.phone,
+          "deviceId": e.detail.value.sn,
+          "email": e.detail.value.mail,
+          "problemDetail": e.detail.value.comment,
+          "type": _this.data.type,
+          "videoUrl": videoUrl,
+          "videoSize": videoSize,
+          "photoSize": photoSize,
+          "photoUrl": photoUrl,
+        }, (res) => {
+          wx.hideLoading()
+          if (res.errCode === 1) {
+            wx.redirectTo({
+              url: './msg/msg'
+            })
+          }
+          console.log("success" + res) // 服务器回包信息
+        });
+      },
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    this.setData({
+      type:Number(e.detail.value)+9
+    })
+    console.log('radio发生change事件，携带value值为：', e)
   },
 
   choose_upload: function () {

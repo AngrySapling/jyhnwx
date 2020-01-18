@@ -14,7 +14,7 @@
     <!-- <button bindtap="bindSendDanmu">发送弹幕</button> -->
   </view>
   <view>
-    <button form-type="submit" class="confirm">确定</button>
+    <button bindtap="confirm" form-type="submit" class="confirm">确定</button>
   </view>
 </view>
 
