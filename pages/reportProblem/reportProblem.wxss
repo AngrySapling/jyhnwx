@@ -9,6 +9,12 @@
   margin-top: 50rpx;
   margin-bottom: 50rpx;
 }
+input{
+  padding-left:20rpx;
+}
+textarea{
+  padding: 10rpx;
+}
 .input-view{
   margin-top: 50rpx;
 }

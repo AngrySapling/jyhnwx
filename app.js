@@ -1,5 +1,6 @@
 //app.js
-
+let reqUrl = "https://www.easeway.co";
+// reqUrl = 'http://29906e24h1.zicp.vip'
 App({
   onLaunch: function (){
     
@@ -7,7 +8,8 @@ App({
   
   globalData: {
     Image: [],
-    Video:"",
+    Video:null,
+    reqUrl:reqUrl,
   }
 })
 

@@ -1,4 +1,5 @@
 // pages/evaluation/evaluation.js
+let app = getApp();
 Page({
 
   /**
@@ -183,37 +184,52 @@ Page({
       console.log("4.score:" + this.data.score);
       console.log("5.comment:" + e.detail.value.comment);
       console.log("6.advice:" + e.detail.value.advice);
-      wx.request({
-        url: 'http://www.easeway.co:8989/wechat/saveEval',
-        method: 'POST',
-        // header: {
-        //   'content-type': 'application/json'
-        // },
-        data: {
-          // "areaCode": "+86",
-          "phoneNumber": e.detail.value.phone,
-          "deviceId": e.detail.value.sn,
-          "eamil": e.detail.value.mail,
-          "score": this.data.score,
-          "comment": e.detail.value.comment,
-          "advice": e.detail.value.advice
-        },
-        success: function (res) {
-          console.log("success" + res.data) // 服务器回包信息
-          if (res.data.errCode == '1') {
-            wx.redirectTo({
-              url: './msg/msg'
+      let _this = this
+      wx.showModal({
+        title: '提示',
+        content: '确认提交评价',
+        success(res) {
+         
+          if (res.confirm) {
+            wx.request({
+              // url: 'http://www.easeway.co:8989/wechat/saveEval',
+              url: app.globalData.reqUrl+'/wechat/saveEval',
+              method: 'POST',
+              // header: {
+              //   'content-type': 'application/json'
+              // },
+              data:{
+                // "areaCode": "+86",
+                "phoneNumber": e.detail.value.phone,
+                "deviceId": e.detail.value.sn,
+                "eamil": e.detail.value.mail,
+                "score": _this.data.score,
+                "comment": e.detail.value.comment,
+                "advice": e.detail.value.advice
+              },
+              success: function (res) {
+                console.log("success" + res.data) // 服务器回包信息
+                if (res.data.errCode == '1') {
+                  wx.redirectTo({
+                    url: './msg/msg'
+                  })
+                }
+              },
+              fail: function (e) {
+                wx.showToast({
+                  title: '发送失败，请稍后再试',
+                  icon: 'success',
+                  duration: 1500
+                })
+              }
             })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
           }
-        },
-        fail: function (e) {
-          wx.showToast({
-            title: '发送失败，请稍后再试',
-            icon: 'success',
-            duration: 1500
-          })
         }
       })
+      //注意
+      
 
 
     }

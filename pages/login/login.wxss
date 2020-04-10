@@ -38,7 +38,7 @@
 
 .areacode{
   margin-left: 90rpx;
-  width: 180rpx
+  width: 20rpx
 }
 
 .btn {
@@ -94,4 +94,11 @@
  /* 设置显示数字之间的间隔 */
   /* letter-spacing:6px;  */
   margin-top: 10rpx;
+}
+.areacolor{
+  color: #000;
+}
+.areacodeipt{
+  width: 80rpx;
+  padding-left: 10rpx;
 }

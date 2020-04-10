@@ -9,7 +9,9 @@
       </view>
     </view>
     <view class="account">
-      <text decode='ture' class="areacode">+86&ensp;>&ensp;</text>
+      <text decode='ture' class="areacode">+</text>
+      <input type="number" maxlength="3" placeholder-class="areacolor" class="areacodeipt" name='areaCode' placeholder='86'></input>
+      <text decode='ture'>&ensp;>&ensp;</text>
       <input placeholder-class="phcolor" name='phoneNumber' class="phone-class" placeholder='请输入手机号码' type="number" maxlength="11" />
     </view>
     <view>

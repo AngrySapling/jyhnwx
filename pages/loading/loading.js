@@ -40,6 +40,7 @@ Page({
             if (res.errCode === 1) {
               let data = res.data;
               wx.setStorageSync("token", data);
+              console.log(res.data)
               that.GetMsg(data)
             }
 
@@ -80,7 +81,6 @@ Page({
   },
   sendWxChatUserInfo: function (userInfo, token) {
     var that = this;
-    console.log(token, 777)
     console.log("sendWxChatUserInfo:init:", token.wechatUuid)
     api.saveWechat({
       "wechatUuid": token.wechatUuid,

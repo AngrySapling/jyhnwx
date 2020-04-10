@@ -1,7 +1,8 @@
 // pages/evaluation/evaluation.js
 let app = getApp();
 import api from '../../api/api.js' 
-let photoUrl = [], photoSize = 0, videoSize = 0, videoUrl = "", i = 0, length = app.globalData.Image.length, successUp = 0, failUp = 0;
+let photoUrl = [], photoSize = 0, videoSize = 0, videoUrl = "", i = 0, length = app.globalData.Image.length, failUp = 0;
+
 Page({
 
   /**
@@ -88,7 +89,6 @@ Page({
 
   },
   clickStar: function(e){
-    console.log(e.currentTarget.id)
     var id = e.currentTarget.id;
     this.data.score = id-1+2;
 
@@ -202,8 +202,15 @@ Page({
         mask:true
       })
       let _this = this
+      console.log(app.globalData,app.globalData.reqUrl,i,'app.globalData.Image')
+      // return;
+
+      if (app.globalData.Image.length){
+        this.img_upload('https://www.easeway.co' + '/wechat/uploadPhotoFile', app.globalData.Image, i, app.globalData.Image.length, e)
+      }else{
+        _this.Playquest(photoUrl,photoSize,e)
+      }
       
-      this.img_upload('https://www.easeway.co/wechat/uploadPhotoFile ', app.globalData.Image, i, length)
     }
     
     // console.log("1.phone:" + e.detail.value.phone);
@@ -218,78 +225,79 @@ Page({
     
 
   },
-  img_upload: function (url, path, i, length) {
+  //上传文件
+  Playquest: function (photoUrl,photoSize,e){
+    let _this = this;
+    if (app.globalData.Video){
+      wx.uploadFile({//上传视频
+        url: 'https://www.easeway.co' + "/wechat/uploadVideoFile",
+        filePath: app.globalData.Video,
+        header: {
+          'content-type': 'multipart/form-data'
+        },
+        name: "video",
+        success: function (res) {
+          let videodata = JSON.parse(res.data).data
+          console.log(videodata,'videodata')
+          videoUrl = videodata.videoUrl
+          videoSize = videodata.videoSize
+          _this.PullMsg(photoUrl, photoSize, videoUrl, videoSize,e)
+        }
+      })
+    }else{
+      _this.PullMsg(photoUrl, photoSize, "", 0, e)
+    }
+  },
+  PullMsg(photoUrl, photoSize, videoUrl, videoSize, e){
+    api.saveFeedBack({
+      "areaCode": "+86",
+      "phoneNumber": e.detail.value.phone,
+      "deviceId": e.detail.value.sn,
+      "email": e.detail.value.mail,
+      "problemDetail": e.detail.value.comment,
+      "type": this.data.type,
+      "videoUrl": videoUrl,
+      "videoSize": videoSize,
+      "photoSize": photoSize,
+      "photoUrl": photoUrl.join(","),
+    }, (res) => {
+      wx.hideLoading()
+      if (res.errCode === 1) {
+        wx.redirectTo({
+          url: './msg/msg'
+        })
+      }
+      console.log("success" + res) // 服务器回包信息
+    });
+  },
+  img_upload: function (url, path, i, length,e) {
+    let _this = this;
     wx.uploadFile({
       url: url,
-      filePath: path,
+      filePath:path[i],
       header: {
         'content-type': 'multipart/form-data'
       },
       name: "photo",
       success: function (res) {
-        successUp++;
         let data = JSON.parse(res.data)
         photoUrl.push(data.data.photoUrl)
-        photoSize += data.data.photoSize
+        photoSize += data.data.photoSize;
       },
       fail: function () {
         failUp++;
       },
       complete: () => {
-        i++;
-        console.log(photoUrl, photoSize, 99999)
+        i++
         if (i == length) {
-          this.showToast('总共' + successUp + '张上传成功,' + failUp + '张上传失败！');
-          if (app.globalData.Video.length) {
-            wx.uploadFile({//上传视频
-              url: "https://www.easeway.co/wechat/uploadVideoFile",
-              filePath: app.globalData.Video,
-              header: {
-                'content-type': 'multipart/form-data'
-              },
-              name: "video",
-              success: function (res) {
-                let videodata = JSON.parse(res.data).data
-                console.log(videodata, 'video')
-                videoUrl = videodata.photoUrl
-                videoSize = videodata.videoSize
-                _this.Playquest(photoUrl, photoSize, videoUrl, videoSize)
-              }
-            })
-          } else {
-            _this.Playquest(photoUrl, photoSize, videoUrl, videoSize)
-          }
-
+          _this.Playquest(photoUrl, photoSize,e)
         }
         else {  //递归调用uploadDIY函数
-          this.uploadDIY(filePaths, successUp, failUp, i, length);
+          _this.img_upload('https://www.easeway.co' +"/wechat/uploadPhotoFile", path,i,length,e);
         }
       },
     })
   },
-  //上传文件
-  Playquest: function (photoUrl,photoSize,videoUrl, videoSize){
-        api.saveFeedBack({
-          "areaCode": "+86",
-          "phoneNumber": e.detail.value.phone,
-          "deviceId": e.detail.value.sn,
-          "email": e.detail.value.mail,
-          "problemDetail": e.detail.value.comment,
-          "type": _this.data.type,
-          "videoUrl": videoUrl,
-          "videoSize": videoSize,
-          "photoSize": photoSize,
-          "photoUrl": photoUrl,
-        }, (res) => {
-          wx.hideLoading()
-          if (res.errCode === 1) {
-            wx.redirectTo({
-              url: './msg/msg'
-            })
-          }
-          console.log("success" + res) // 服务器回包信息
-        });
-      },
   radioChange: function (e) {
     this.setData({
       type:Number(e.detail.value)+9
@@ -301,6 +309,24 @@ Page({
     wx.navigateTo({
       url: './photoOrVideo/photoOrVideo',
     })
+  },
+  changePhone: function (res) {
+    wx.navigateTo({
+      url: '../login/login?title=更换手机号码',
+    })
+  },
+
+  uploadPhoto: function () {
+    wx.navigateTo({
+      url: './uploadPhoto/uploadPhoto',
+    })
+  },
+  uploadVideo: function () {
+    wx.navigateTo({
+      url: './uploadVideo/uploadVideo',
+    })
+  },
+
     // var that = this;
     // wx.showActionSheet({
     //   itemList: ['手机相册', '拍摄照片'],
@@ -342,22 +368,4 @@ Page({
     //     }
     //   }
     // });
-  },
-  changePhone: function (res) {
-    wx.navigateTo({
-      url: '../login/login?title=更换手机号码',
-    })
-  },
-
-  uploadPhoto: function () {
-    wx.navigateTo({
-      url: './uploadPhoto/uploadPhoto',
-    })
-  },
-  uploadVideo: function () {
-    wx.navigateTo({
-      url: './uploadVideo/uploadVideo',
-    })
-  },
-
 })

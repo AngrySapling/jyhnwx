@@ -23,10 +23,10 @@ Page({
 
 
   sendWxChatUserInfo: function (userInfo, token) {
-    console.log(userInfo, 'asd ',token.wxUniqueId)
+    console.log(userInfo, 'asd ', token.wechatUuid)
     var that = this;
     api.saveWechat({
-      "wechatUuid": token.wxUniqueId,
+      "wechatUuid": token.wechatUuid,
       "gender": userInfo.gender,
       "userName": userInfo.nickName,
       "language": userInfo.language,
@@ -35,8 +35,6 @@ Page({
       "city": userInfo.city,
       "avatarUrl": userInfo.avatarUrl
     }, (res) => {
-      console.log(res,7777)
-      return;
       if (res.errCode === 1) {//成功将信息保存
         if (token.isBindStatus) {
           wx.reLaunch({
@@ -54,6 +52,7 @@ Page({
   bindGetUserInfo(e) {
     console.log(e.detail.userInfo)
     let token = wx.getStorageSync("token");
+    console.log(token,'token')
     this.sendWxChatUserInfo(e.detail.userInfo,token);
   },
 

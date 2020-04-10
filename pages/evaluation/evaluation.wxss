@@ -73,7 +73,12 @@
   margin-top: 20rpx;
   border-radius: 5px;
 }
-
+input{
+  padding-left:20rpx;
+}
+textarea{
+  padding: 10rpx;
+}
 .confirm {
   width: 60%;
   margin-top: 50rpx;

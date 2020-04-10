@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/loading/loading",
+    "pages/login/login",
     "pages/reportProblem/reportProblem",
     "pages/choose/choose",
     "pages/wxlogin/wxlogin",
-    "pages/login/login",
     "pages/verification/verification-code",
     "pages/reportProblem/msg/msg",
     "pages/evaluation/evaluation",

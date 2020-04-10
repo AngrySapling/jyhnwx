@@ -74,8 +74,9 @@ Page({
    */
   getCode: function(e) {
     var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+
     var phoneNumber = e.detail.value.phoneNumber;
-    console.log(phoneNumber);
+    var areaCode = e.detail.value.areaCode?"+"+e.detail.value.areaCode:"+86";
     if (phoneNumber.length == 0) {
       wx.showModal({
         content: '输入手机号码为空',
@@ -114,7 +115,7 @@ Page({
         mask:true
       })
       http.getPhoneCode({
-        "areaCode": "+86",
+        "areaCode": areaCode,
         "phoneNumber": phoneNumber,
         "identification": phoneNumber + 1,
       }, (res) => {

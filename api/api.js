@@ -1,5 +1,6 @@
 const api = require('./request.js');
 let reqUrl = "https://www.easeway.co";
+// reqUrl = 'http://29906e24h1.zicp.vip'
 // reqUrl = "http://192.168.199.228:8989";
 // reqUrl = 'https://api.it120.cc/mzsx';
 //获取验证码
@@ -63,7 +64,11 @@ const http = {
   },
   //上传用户提交问题
   saveFeedBack(data, callback) {
-    api({ url: saveFeedBackUrl, method: "POST", data:data },true,true).then((res) => {
+    api({
+      url: saveFeedBackUrl, 
+      method: "POST", 
+      data: data,
+      },true).then((res) => {
       callback(res)
     }).catch((err) => {
       console.log(err)
