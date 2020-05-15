@@ -1,4 +1,5 @@
 // pages/evaluation/evaluation.js
+import Toast from '../../components/toast/toast';
 let app = getApp();
 Page({
 
@@ -9,6 +10,7 @@ Page({
     starnum:[0,0,0,0,0],
     score: 0,  //ID就是星级-1.因此id+1就是评星
     phoneNumber: '',
+    seriNumber:''
   },
 
   /**
@@ -18,13 +20,6 @@ Page({
     this.setData({
       phoneNumber: options.phoneNumber
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
 
   /**
@@ -40,33 +35,18 @@ Page({
   onHide: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  scan() {
+    let that = this
+    wx.scanCode({
+      onlyFromCamera: true,
+      success(res) {
+        console.log(res)
+        let code = res.result
+        that.setData({
+          seriNumber:code
+        })
+      }
+    })
   },
   clickStar: function(e){
     console.log(e.currentTarget.id)
@@ -208,17 +188,18 @@ Page({
                 "advice": e.detail.value.advice
               },
               success: function (res) {
-                console.log("success" + res.data) // 服务器回包信息
-                if (res.data.errCode == '1') {
+                console.log("success" + res.data.data) // 服务器回包信息
+                if (res.data.errCode === 1) {
                   wx.redirectTo({
                     url: './msg/msg'
                   })
+                }else{
+                  Toast(res.data.errMsg);
                 }
               },
               fail: function (e) {
                 wx.showToast({
                   title: '发送失败，请稍后再试',
-                  icon: 'success',
                   duration: 1500
                 })
               }

@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "van-icon": "../../components/icon/index"
+  },
   "navigationBarTitleText": "问题反馈"
 }

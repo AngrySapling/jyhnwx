@@ -54,11 +54,26 @@ textarea{
   font-weight: bold;
   font-size: 35rpx;
 }
-.input1{
+.ipt{
+  display:flex;
+  padding:20rpx 8% 0;
+}
+.input1 {
+  flex:1;
+  height: 60rpx;
+  border: 2rpx #cfd3d6 solid;
+  border-radius: 5px;
+}
+.vant-icon{
+  vertical-align: middle;
+  margin: 0 10rpx;
+}
+.input2{
+  flex:1;
   width: 83%;
   height: 60rpx;
   border: 2rpx #cfd3d6 solid;
-  margin-left: 8%;
+  margin-left:8%;
   margin-top: 20rpx;
   border-radius: 5px;
 }

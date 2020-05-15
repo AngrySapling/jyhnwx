@@ -1,0 +1,17 @@
+<!--components/paytop/pay.wxml-->
+<view class="payStatus">
+  <view class="status" wx:if="{{content === 'nopay'}}">
+    <image class="img" src="../../pages/images/payicon.png"></image>
+    <text class="text">未付款</text>
+  </view>
+  <view class="status" wx:if="{{content === 'close'}}">
+    <image class="img" src="../../pages/images/orderclose.png"></image>
+    <text class="text" >交易关闭</text>
+  </view>
+  <view class="status usermsg" wx:if="{{content === 'usermsg'}}">
+    <text class="ipt">收货人:</text>
+    <input class="ipt ipt1" bindinput="我的名字"></input>
+    <input class="ipt ipt2" bindinput="13133113131"></input>
+  </view>
+  <view class="bj"> <image src="../../pages/images/paybj.png"></image> </view>
+</view>

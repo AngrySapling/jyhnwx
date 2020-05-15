@@ -1,4 +1,20 @@
 <!--pages/loading/loading.wxml-->
 <view class="loading">
   <image src="../../images/loading.png"></image>
+  <view class="msg">
+    <button class="btn" bindtap="Login" wx:if="{{BtnShow}}">登录</button>
+    <view class="title">
+      <view class="title-item">
+      <van-icon name="info-o" size="14px" />
+      <text class="icon-txt">进行设备使用评价</text>  
+    </view>
+      <view class="title-item">
+      <van-icon name="info-o" size="14px" />
+      <text class="icon-txt">进行设备使用反馈</text>  </view>
+      <view class="title-item">
+        <van-icon name="info-o" size="14px" />
+        <text class="icon-txt">评价与反馈仅限设备使用者</text>  
+      </view> 
+    </view>
+  </view>
 </view>

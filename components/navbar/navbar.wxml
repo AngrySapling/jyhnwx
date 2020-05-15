@@ -1,0 +1,4 @@
+<view class="navBar" style="padding-top:{{statusBarHeight}}px">
+  <image src="../../pages/images/navbarbj.png"></image>
+  <view class="title">微丰达</view>
+</view>

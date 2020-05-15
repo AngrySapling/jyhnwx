@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "van-icon": "../../components/icon/index",
+    "van-toast": "../../components/toast/index"
+  },
   "navigationBarTitleText": "使用评价"
 }

@@ -1,4 +1,13 @@
+.mylogin{
+  height:100vh;
+  background:#f2f2f2;
+}
+.login .van-ellipsis{
+  text-align: left;
+}
 .login{
+  border-top:1px solid #f2f2f2;
+  background:#fff;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -8,23 +17,58 @@
 .login-font{
   display: flex;
   font-size: 50rpx;
-  margin-top:100rpx;
+  margin-top:80rpx;
   margin-bottom: 20rpx;
   font-weight: 560;
   align-content: center;
   justify-content: center;
 }
+.van-ellipsis{
+  /* text-align: left; */
+}
+.van-tabs__line{
+  width: 100% !important;
+  background-color:#3d8097 !important;
+  transform: translateX(0) !important;
+}
+.login-btn{
+  display: block;
+  width:90%;
+  margin:150rpx auto 50rpx;
+}
+.login-btn .van-button{
+  width:100%;
+}
 .description-text{
   display: flex;
   align-content: center;
   justify-content: center;
-  margin-bottom: 120rpx;
+  margin-bottom: 100rpx;
   color:#9B9B9B;
 }
+.login-phone{
+  display:flex;
+  padding:0px 16px;
+  border-bottom: 1px solid #f2f2f2;
+}
+.area input{
+  background: #f2f2f2;
+  text-align: center;
+}
+.login-phone .area .van-cell{
+  max-width: 30px;
+  min-width: 30px;
+  padding: 10px 0;
+}
+.lable-phone{
+  max-width: 90px;
+  min-width: 90px;
+  font-size: 14px;
+  line-height: 44px;
+}
 .account{
-  margin-top: 20rpx; 
-  margin-left:20rpx;
-  display: flex;
+  margin-top: 30rpx; 
+  /* display: flex;
   flex-direction: row;
   font-size: 40rpx;
   border-bottom: 1px solid #f0f0f0;
@@ -32,34 +76,22 @@
   padding-bottom: 20rpx;
   justify-content: center;
   align-content: center;
-  /* 实现文字垂直居中，太秀了 */
-  align-items: center; 
+  实现文字垂直居中，太秀了 */
+  /* align-items: center;  */
 }
-
+.tab{
+  padding:40rpx 0;
+  background:#fff;
+}
+.tab1{
+  background:#fff;
+}
 .areacode{
   margin-left: 90rpx;
   width: 20rpx
 }
 
-.btn {
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 0rpx;
-  margin-bottom: 10rpx;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-.btn button {
-  width: 100%;
-  background:#0DBCBC;
-  border: none;
-  text-align: center;
-  color: #fff;
-  outline: none;
-  font-size: 40rpx;
-}
+
 .register{
   font-size:35rpx;
   display: flex;
@@ -85,10 +117,13 @@
   align-content: center;
   justify-content: center;
   font-size: 28rpx;
-  margin-top:400rpx;
+  margin-top:10rpx;
 }
 .agreement-details{
   color: #0DBCBC;
+}
+.van-button--primary{
+  background: #3d8097 !important;
 }
 .phone-class{
  /* 设置显示数字之间的间隔 */

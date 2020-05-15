@@ -20,12 +20,16 @@
     <view class='input-view'>
       <text class='input-must'>*</text>
       <text class='input-text'>2.请输入主机序列号：</text>
-      <input name="sn" class='input1' maxlength='12' placeholder="12位字母带数字，请在取药机右侧查看" placeholder-style="color:#cfd3d6"></input>
+      <view class="ipt">
+        <input name="sn" value="{{seriNumber}}" class='input1' maxlength='12' placeholder="12位字母带数字，请在取药机右侧查看" placeholder-style="color:#cfd3d6"></input>
+        <van-icon size="30px" name="photograph" class="vant-icon" bindtap="scan"/>
+      </view>
+      <!-- <input name="sn" class='input1' maxlength='12' placeholder="12位字母带数字，请在取药机右侧查看" placeholder-style="color:#cfd3d6"></input> -->
     </view>
     <view class='input-view'>
       <text class='input-must' decode="{{true}}">&nbsp;</text>
       <text class='input-text'>3.您的邮箱：</text>
-      <input name="mail" class='input1' placeholder="支持QQ邮箱，163邮箱，谷歌、新浪邮箱等" placeholder-style="color:#cfd3d6"></input>
+      <input name="mail" class='input2' placeholder="支持QQ邮箱，163邮箱，谷歌、新浪邮箱等" placeholder-style="color:#cfd3d6"></input>
     </view>
     <view class='input-view'>
       <view>

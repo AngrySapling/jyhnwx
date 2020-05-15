@@ -5,7 +5,6 @@ App({
   onLaunch: function (){
     
   },
-  
   globalData: {
     Image: [],
     Video:null,

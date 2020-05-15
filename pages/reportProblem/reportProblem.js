@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    seriNumber:'',
     app:app,
     starnum:[0,0,0,0,0],
     type: 8, 
@@ -88,6 +89,19 @@ Page({
   onShareAppMessage: function () {
 
   },
+  scan(){
+    let that = this
+    wx.scanCode({
+      onlyFromCamera: true,
+      success(res) {
+        console.log(res)
+        let code = res.result
+        that.setData({
+          seriNumber: code
+        })
+      }
+    })
+  },
   clickStar: function(e){
     var id = e.currentTarget.id;
     this.data.score = id-1+2;
@@ -114,6 +128,7 @@ Page({
   },
 
   bindFormSubmit: function (e) {
+    console.log(e)
     if (e.detail.value.phone.length!=11)
     {
       wx.showModal({
@@ -164,22 +179,6 @@ Page({
         }
       })
     }
-    // else if (this.data.type < 1) {
-    //   wx.showModal({
-    //     title: '未进行评星',
-    //     content: '请点击4评星，对产品进行总体评价',
-    //     // confirmText: "确认",
-    //     // cancelText: "辅助操作",
-    //     success: function (res) {
-    //       console.log(res);
-    //       if (res.confirm) {
-    //         console.log('用户点击主操作')
-    //       } else {
-    //         console.log('用户点击辅助操作')
-    //       }
-    //     }
-    //   })
-    // }
     else if (e.detail.value.comment.length < 1) {
       wx.showModal({
         title: '未填写使用体验',
@@ -212,18 +211,6 @@ Page({
       }
       
     }
-    
-    // console.log("1.phone:" + e.detail.value.phone);
-    // console.log("2.sn:" + e.detail.value.sn);
-    // console.log("3.mail:" + e.detail.value.mail);
-    // console.log("4.score:" + this.data.score);
-    // console.log("5.comment:"+e.detail.value.comment);
-    // console.log("6.advice:" + e.detail.value.advice, e);
-
-
-    // 请求的包体为 {"a":{"b":[1,2,3],"c":{"d":"test"}}}
-    
-
   },
   //上传文件
   Playquest: function (photoUrl,photoSize,e){

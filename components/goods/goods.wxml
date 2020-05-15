@@ -1,0 +1,50 @@
+<!--components/goods/goods.wxml-->
+<view class="common-goods">
+  <view class="img">
+    <image src="../../pages/images/goods.png"></image>
+  </view>
+  <view class="msg">
+    <view class="left">
+      微丰达购物自提仓库点2
+    </view>
+    <view class="right">
+        <view class="code" style="color:#e91e00;">2.5万</view>
+        <view class="name">购买指数</view>
+    </view>
+  </view>
+  <view class="datenum">
+      <view class="date">
+        <view class="date-msg">
+          <text>预售时间:</text>
+          <text style="padding-left:18rpx;">02月24日</text>
+        </view>
+        <view class="date-msg">
+          <text>提货时间:</text>
+          <text style="padding-left:18rpx;">02月25日</text>
+        </view>
+      </view>
+      <view class="num">
+        <view class="num-msg">
+          今日已售 <text style="color:red;">50000</text>份
+        </view>
+        <view class="num-msg" style="color:#f37e2e;">
+          限量50000份
+        </view>
+      </view>
+    </view>
+  <view class="buyprice">
+    <view class="price">
+        <view style="line-height:74rpx;">
+          <text style="font-size:24rpx;">¥</text>
+          <text style="font-size:46rpx;">9.99</text>
+          <text class="price-normal">¥15</text>
+        </view>
+        <view class="goGoods" wx:if="{{actives}}">
+            进入蔬菜
+        </view>
+    </view>
+    <view class="buy">
+      <view class="addCarts">加入购物车</view>
+    </view>
+  </view>
+</view>

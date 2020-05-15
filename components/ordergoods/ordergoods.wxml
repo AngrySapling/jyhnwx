@@ -1,0 +1,17 @@
+<!--components/ordergoods/ordergoods.wxml-->
+<view class="goods">
+  <image src="../../pages/images/goods.png"></image>
+  <view class="goodscontent">
+    <view class="title">土豆字段非常长哈哈哈哈撒大声地啊哈哈哈哈哈哈</view>
+    <view class="spec">1000g 正负50g</view>
+    <view class="play">
+      <view class="date">03月01日 16:00提货</view>
+      <view class="num">X1</view>
+    </view>
+    <view class="price">
+      <text class="sp1">¥</text>
+      <text class="sp2">9.99</text>
+      <text class="sp3">¥4</text>
+    </view>
+  </view>
+</view>

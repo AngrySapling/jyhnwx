@@ -1,4 +1,4 @@
-<view>
+<view class="mylogin">
   <form bindsubmit="getCode">
     <view class="login">
       <view class="login-font">
@@ -9,18 +9,57 @@
       </view>
     </view>
     <view class="account">
-      <text decode='ture' class="areacode">+</text>
-      <input type="number" maxlength="3" placeholder-class="areacolor" class="areacodeipt" name='areaCode' placeholder='86'></input>
-      <text decode='ture'>&ensp;>&ensp;</text>
-      <input placeholder-class="phcolor" name='phoneNumber' class="phone-class" placeholder='请输入手机号码' type="number" maxlength="11" />
-    </view>
-    <view>
-      <view class='btn'>
-        <button size='mini' form-type="submit">获取验证码</button>
+      <van-tabs active="{{ active }}">
+        <van-tab title="短信验证登录">
+          <view class="tab1">
+            <van-cell-group>
+            <view class="login-phone">
+              <view class="lable-phone">手机号</view>
+              <view style="display:flex;">
+                <text style="line-height:44px;">+</text>
+                <van-field
+                class="area"
+                type="number"
+                bind:blur="onChangeareaCode"
+                placeholder="{{areaCode}}"
+                border="{{ false }}"
+                />
+                <van-icon name="arrow" />
+              </view>
+              
+              <van-field
+                  clearable
+                  bind:blur="onChangePhone"
+                  placeholder="请输入手机号"
+                  border="{{ false }}"
+                  confirm-type="完成"
+                />
+                
+                  <!-- bind:change="onChangePhone" -->
+            </view>
+              <van-field
+                center
+                clearable
+                bind:blur="onChangeMsm"
+                label="短信验证码"
+                placeholder="请输入短信验证码"
+                border="{{ false }}"
+                use-button-slot
+              >
+                <van-button bindtap="sendSms" slot="button" size="small" type="primary"
+                  >{{times?times:'发送验证码'}}</van-button>
+              </van-field>
+            </van-cell-group>
+          </view>
+        </van-tab>
+      </van-tabs>
+      <view style="width:100%;">
+        <van-button bindtap="Login" slot="button" type="primary" class="login-btn">
+          登录
+        </van-button>
       </view>
-      <!-- <view class="register">
-        <button class="forgotpassword" type="primary" catchtap='accountAndPasswordLogin' bindtap="nowregister">账号密码登录</button>
-      </view> -->
+      
+      <!-- </view> -->
       <view class="agreement">
         <text>登录即代表您同意 </text>
         <text decode='ture'>&ensp;</text>
